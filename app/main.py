@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.routes import folder, file
 from app.database import create_db_and_tables
 
-app = FastAPI()
+app = FastAPI(title="FolderMaster-FastAPI")
 
 @app.on_event("startup")
 def startup():
