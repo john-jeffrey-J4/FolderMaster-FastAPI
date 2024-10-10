@@ -13,4 +13,4 @@ app.include_router(file.router)
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the File Management System!"}
+    return {"message": "Welcome to the File Management System"}

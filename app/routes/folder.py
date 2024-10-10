@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.schemas.folder_schemas import FolderCreate, FolderRead
-from app.services.folder_service import create_folder, get_folder, delete_folder
+from app.services.folder_service import create_folder, get_folder, delete_folder, move_folder
 from app.database import get_db
 
 
@@ -26,7 +26,7 @@ def remove_folder(folder_id: int, session: Session = Depends(get_db)):
     return {"message": "Folder deleted"}
 
 
-@router.put("/folders/{folder_id}/move/{target_parent_id}", response_model=FolderRead)
+@router.patch("/folders/{folder_id}/move/", response_model=FolderRead)
 def move_existing_folder(folder_id: int, target_parent_id: int, session: Session = Depends(get_db)):
     moved_folder = move_folder(folder_id, target_parent_id, session)
     if not moved_folder:
